@@ -2,6 +2,7 @@ package edu.miu.afinal.feature.home.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -35,31 +36,38 @@ fun HomeScreen(
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LazyColumn (
-        modifier = modifier
-    ){
-        items(uiState.categories) {
-            ListItem(
-                modifier = Modifier.clickable{
-                    onCategoryClick(it)
-                },
-                headlineContent = { Text(it.name) },
-                trailingContent = {
-                    Image(
-                        imageVector = Icons.Default.Face,
-                        contentDescription = "Face"
-                    )
-                }
-            )
-            HorizontalDivider()
-        }
-        item {
-            ListItem(
-                modifier = Modifier.clickable{
-                    onSettingClick()
-                },
-                headlineContent = { Text("Settings") },
-            )
+    Column {
+        Text("Today's joke")
+        HorizontalDivider()
+        Text("joke ....")
+        Text("Item Categories")
+        HorizontalDivider()
+        LazyColumn (
+            modifier = modifier
+        ){
+            items(uiState.categories) {
+                ListItem(
+                    modifier = Modifier.clickable{
+                        onCategoryClick(it)
+                    },
+                    headlineContent = { Text(it.name) },
+                    trailingContent = {
+                        Image(
+                            imageVector = Icons.Default.Face,
+                            contentDescription = "Face"
+                        )
+                    }
+                )
+                HorizontalDivider()
+            }
+            item {
+                ListItem(
+                    modifier = Modifier.clickable{
+                        onSettingClick()
+                    },
+                    headlineContent = { Text("Settings") },
+                )
+            }
         }
     }
 }
